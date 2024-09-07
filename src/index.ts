@@ -1,13 +1,14 @@
 import { ponder } from "@/generated";
 
-ponder.on("PrimitiveManager:Swap", async ({ event, context }) => {
-  const { SwapEvent } = context.db;
+ponder.on("DendeVault:BuyStrategy", async ({ event, context }) => {
+  const { BuyStrategyEvent } = context.db;
 
-  await SwapEvent.create({
+  await BuyStrategyEvent.create({
     id: event.log.id,
     data: {
-      payer: event.args.payer,
-      recipient: event.args.recipient,
+      chainId: event.args.chainId,
+      crossAsset: event.args.crossAsset,
+      amount: event.args.amount,
     },
   });
 });
